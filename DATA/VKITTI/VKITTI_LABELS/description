@@ -1,9 +1,0 @@
-VKITTI Labels converted to YOLO format
-
-- class, x, y, w, h, truncation_rate, occlusion_rate
-
-- 1 label per each image
-  - {}frame_{}camera = a single image
-  - ex) 0frame1camera = rgb00002
-
-- each row represents a single object in an image 
