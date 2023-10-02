@@ -5,7 +5,13 @@ Bridging the gap between the source domain(VKITTI) and the target domain (BDD100
 - Expensive cost of producing various datasets. 
 - YOLOv5 trained on KITTI + VKITTI performs well on KITTI dataset, however, fails to produce promising results when tested on BDD100k.
 
+Trained| Test | mAP.50|
+--- | --- | --- |
+KITTI + VKITTI| BDD100k | .342|
+
+
 #### Cause:
+- BDD100k provides images taken 24 hours whereas KITTI and VKITTI Clone were taken during the day
 - Difference in scenery(background/environment, lighting conditions)
 - Fails to perform detection especially in cases when the image is taken during nighttime or when sunlight is strong
 
@@ -52,6 +58,7 @@ We experimented with different augmentation techniques and two optimizers[SGD, A
 
 
 
+
 ## Data Preprocess
 
 #### Labels to YOLO format
@@ -65,10 +72,23 @@ YOLO Format
 5. Normalize bounding box coordinates
 
 The DATA folder in this repo contains different codes for processing the data.
-prepare_BDD100k
-prepare_Kitti
-prepare_Vkitti_labels
-prepare_Vkitti_images -- > code to accumulate images contained in separate Scene folders into one directory
+Prepare_BDD100k.py (prepare images and data)
+Prepare_Kitti.py (prepare images and data)
+
+* VKITTI
+  * **Note**: VKITTI has a different directory structure where images are separated in different folders(Scene01~Scene20)
+      - Two codes are provided: one for annotations, the other for images
+Prepare_VKitti_labels.py
+  - Creates one label per image based on [frame][camera_id]
+  - Image + labels from folder [camera01, left-15-degrees, left-30-degrees, right-15-degrees, right-30-degrees] were       excluded
+Prepare_VKitti_images.py
+  - Code to accumulate images contained in separate Scene folders into one directory
+  - Rename files according to 
+
+#### etc.
+- resize_images.py -- > resize images to 640*640
+- Draw_BBox --> draws bounding box coordinates from annotation file(useful to check if labels were converted properly)
+- 
 
 
 
