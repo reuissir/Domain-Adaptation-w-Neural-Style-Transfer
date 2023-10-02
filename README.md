@@ -1,3 +1,8 @@
+이름 | 역할
+--- | ---
+안희상 | 데이터 정제, Neural Style Transfer, YOLOv5 train
+양원규 | Neural Style Transfer, YOLOv5 train, 결과 분석
+
 # Domain-Adaptation-w-Neural-Style-Transfer
 Bridging the gap between the source domain(VKITTI) and the target domain (BDD100k) through neural style transfer applied synthetic data
 
@@ -9,7 +14,8 @@ Trained| Test | mAP.50|
 --- | --- | --- |
 KITTI + VKITTI| BDD100k | .342|
 
-| |
+![c93bd9ce-ea579ed8](https://github.com/reuissir/Domain-Adaptation-w-Neural-Style-Transfer/assets/96709570/1017445f-4a09-4534-8236-b2fdcc204192) ![c093f8be-262822a7](https://github.com/reuissir/Domain-Adaptation-w-Neural-Style-Transfer/assets/96709570/452879c5-b9cf-4611-9151-f800b859ebb0)
+![c94ceb93-5b8608c4](https://github.com/reuissir/Domain-Adaptation-w-Neural-Style-Transfer/assets/96709570/882200e2-291e-4798-becd-93b9545e9175)
 
 #### Cause:
 - BDD100k provides images taken 24 hours whereas KITTI and VKITTI Clone were taken during the day
