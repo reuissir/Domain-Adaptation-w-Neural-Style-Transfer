@@ -2,8 +2,8 @@
 Bridging the gap between the source domain(VKITTI) and the target domain (BDD100k) through neural style transfer applied synthetic data
 
 #### Problem at hand:
-- Expensive cost of producing various datasets. 
-- YOLOv5 trained on KITTI + VKITTI performs well on KITTI dataset, however, fails to produce promising results when tested on BDD100k.
+- Expensive cost of producing various datasets in real-life 
+- YOLOv5 trained on KITTI + VKITTI performs well on KITTI dataset, however, fails to produce promising results when tested on BDD100k
 
 Trained| Test | mAP.50|
 --- | --- | --- |
