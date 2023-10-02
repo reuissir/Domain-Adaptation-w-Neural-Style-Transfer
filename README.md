@@ -41,12 +41,12 @@ We experimented with different augmentation techniques and two optimizers[SGD, A
 
 ### Neural Style Transfer
 - Neural style transfer was conducted on the VKITTI Clone data directory.
-  ** Hyperparameters:** content layer, style layer, content weight, style weight, total variation weight,             
+  ** Hyperparameters:** content layer, style layer, content weight, style weight, total variation weight,            
                         init_method[style, content, random(gaussian or white noise)]
-  - Content layer conv_4_2 showed best results with content information still strong.
-  - Only when stylizing night did we use conv_2.
-  - Style informations were extracted from every layer except the layer responsible for the content.
-  - Different init_methods were used for various styles(fog-content, rain-style, night-content, sunset-content)
+  - **Content layer:** conv_4_2 showed best results with content information still strong.
+      - Only when stylizing night did we use conv_2.
+  - **Style layer:** style information was extracted from every layer except the layer responsible for the content.
+  - Different **init_methods** were used for various styles(fog-content, rain-style, night-content, sunset-content)
   - The content images were set as VKITTI Clone(2066 images)
   - A total of 2066 * 4(styles), 8264 images were stylized to form our NST Dataset.
   - KITTI + VKITTI clone + NST dataset was trained to be compared with the original KITTI + VKITTI dataset.
