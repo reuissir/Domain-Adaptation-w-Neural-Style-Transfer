@@ -15,7 +15,7 @@ KITTI + VKITTI| BDD100k | .342|
 - Difference in scenery(background/environment, lighting conditions)
 - Fails to perform detection especially in cases when the image is taken during nighttime or when sunlight is strong
 
-![image](https://github.com/reuissir/Domain-Adaptation-w-Neural-Style-Transfer/assets/96709570/6458a84e-bd36-4e60-a749-bb1a41439062)
+
 
 ### **Method**:
 - Train model on synthetic data stylized with different background scenes(night, rain, fog, sunset) to adapt to the environment variables prevalent in the target domain.
@@ -49,6 +49,10 @@ We experimented with different augmentation techniques and two optimizers[SGD, A
   - The content images were set as VKITTI Clone(2066 images)
   - A total of 2066 * 4(styles), 8264 images were stylized to form our NST Dataset.
   - KITTI + VKITTI clone + NST dataset was trained to be compared with the original KITTI + VKITTI dataset.
+
+night | fog | rain | sunset
+--- | --- | --- | --- |
+![night_Scene01_clone_Camera0_00130 (1)](https://github.com/reuissir/Domain-Adaptation-w-Neural-Style-Transfer/assets/96709570/d35d948f-764f-4dca-8dfc-db7633349ea9)|
 
 
     
