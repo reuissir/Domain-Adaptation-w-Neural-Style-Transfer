@@ -16,7 +16,7 @@ Bridging the gap between reality and simulation through neural style transfer. D
   --> Compare performance of VKITTI + KITTI trained model vs. VKITTI + VKITTI Clone + VKITTI Clone NST(our dataset)         on BDD100k  
 - Use BDD100k as the validation dataset during training
 
-### Models used
+#### Models used
 > YOLOv5m6, Ultralytics
 [https://github.com/ultralytics/yolov5]
 
@@ -26,12 +26,18 @@ Bridging the gap between reality and simulation through neural style transfer. D
 **Note:** We modified the code of Neural Style Transfer to perform sequential neural style transfer on an entire image directory.
 During experiments: we used the main code to produce and evaluate a single output at a time
 
-### Environment
+#### Environment
 - Ryzen 3600, 2070 Super 8gb, 16 ram
 - Google Colab Pro+ (A100)
 
 We produced most of our dataset through Google Colab while most of our training was done on my local environment.
 We experimented with different augmentation techniques and two optimizers[SGD, AdamW] to bring out the best performance during train time.
 
-
+### Method 1: Neural Style Transfer
+- Neural style transfer was conducted on the VKITTI Clone data directory.
+  ** Hyperparameters:** content layer, style layer, content weight, style weight, total variation weight,             
+                        init_method[style, content, random(gaussian or white noise)]
+  - Content layer conv_4_2 showed best results with content information still strong.
+  - Only when stylizing night did we use conv_2.
+  - Style informations were extracted from every layer except the layer responsible for the content.
 
