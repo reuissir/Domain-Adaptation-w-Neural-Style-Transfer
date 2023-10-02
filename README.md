@@ -1,10 +1,9 @@
 # Domain-Adaptation-w-Neural-Style-Transfer
-Bridging the gap between reality and simulation through neural style transfer. Domain adaptation of the source domain(VKITTI) to (BDD100k).
+Bridging the gap between the source domain(VKITTI) and the target domain (BDD100k) through neural style transfer applied synthetic data
 
 #### Problem at hand:
 - Expensive cost of producing various datasets. 
 - YOLOv5 trained on KITTI + VKITTI performs well on KITTI dataset, however, fails to produce promising results when tested on BDD100k.
-
 
 #### Cause:
 - Difference in scenery(background/environment, lighting conditions)
@@ -12,7 +11,7 @@ Bridging the gap between reality and simulation through neural style transfer. D
 
 ![image](https://github.com/reuissir/Domain-Adaptation-w-Neural-Style-Transfer/assets/96709570/6458a84e-bd36-4e60-a749-bb1a41439062)
 
-#### Methods:
+### **Method**:
 - Train model on synthetic data stylized with different background scenes(night, rain, fog, sunset) to adapt to the environment variables prevalent in the target domain.
   --> Compare performance of VKITTI + KITTI trained model vs. VKITTI + VKITTI Clone + VKITTI Clone NST(our dataset)         on BDD100k  
 
@@ -33,7 +32,7 @@ During experiments: we used the main code to produce and evaluate a single outpu
 We produced most of our dataset through Google Colab while most of our training was done on my local environment.
 We experimented with different augmentation techniques and two optimizers[SGD, AdamW] to bring out the best performance during train time.
 
-### Method: Neural Style Transfer
+### Neural Style Transfer
 - Neural style transfer was conducted on the VKITTI Clone data directory.
   ** Hyperparameters:** content layer, style layer, content weight, style weight, total variation weight,             
                         init_method[style, content, random(gaussian or white noise)]
@@ -41,10 +40,35 @@ We experimented with different augmentation techniques and two optimizers[SGD, A
   - Only when stylizing night did we use conv_2.
   - Style informations were extracted from every layer except the layer responsible for the content.
   - Different init_methods were used for various styles(fog-content, rain-style, night-content, sunset-content)
+  - The content images were set as VKITTI Clone(2066 images)
+  - A total of 2066 * 4(styles), 8264 images were stylized to form our NST Dataset.
+  - KITTI + VKITTI clone + NST dataset was trained to be compared with the original KITTI + VKITTI dataset.
 
+
+    
 ### Object detection: YOLOv5m6
-- We tried YOLOv5m6 and YOLOl6, however, found that YOLOl6 took too long in our environment. YOLOv5m6 was the best      model we could try.
-- All training runs were run at 100 epochs, 16 batches, pretrained(COCO-128) weights offered by Ultralytics. 
+- We tried YOLOv5m6 and YOLOl6, however, found that YOLOl6 took too long in our environment. YOLOv5m6 was the best      model that matched our environment.
+- All training runs were run at 100 epochs, 16 batches, pretrained(COCO-128) weights offered by Ultralytics.
+
+
+
+## Data Preprocess
+
+#### Labels to YOLO format
+YOLO Format
+![image](https://github.com/reuissir/Domain-Adaptation-w-Neural-Style-Transfer/assets/96709570/5f03cad8-6326-4a75-8828-2efedd9e70fa)
+
+1. Unite all classes under {0: 'Car', 1: 'Van', 2: 'Truck, 3: 'DontCare'}
+   - return int value
+3. Adjust bounding box coordinates(left, right, top bottom) to resized image
+4. Convert bounding box coordinates to x, y, w, h
+5. Normalize bounding box coordinates
+
+The DATA folder in this repo contains different codes for processing the data.
+prepare_BDD100k
+prepare_Kitti
+prepare_Vkitti_labels
+prepare_Vkitti_images -- > code to accumulate images contained in separate Scene folders into one directory
 
 
 
