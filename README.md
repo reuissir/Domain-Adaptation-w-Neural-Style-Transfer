@@ -10,7 +10,7 @@ Bridging the gap between the source domain(VKITTI) and the target domain (BDD100
 Virtual Kitti(VKITTI) offers synthetic object detection data, produced with Unity, that simulates real-world environments. It offers real-time drive images in overcast, morning, sunset, foggy, and rainy backgrounds that are absent in KITTI. On top of VKITTI, we sought to create a stylized dataset with neural style transfer which would perform better than VKITTI on a never-before-seen dataset(BDD100k). We trained two groups of datasets: 1: "KITTI + VKITTI", 2: "KITTI + VKITTI clone + NST VKITTI Clone" . Testing was done on BDD100k to compare the results. 
 
 #### Problem at hand: 
-- YOLOv5 trained on KITTI + VKITTI performs well on KITTI dataset, however, suffers difficulty in detecting in environments not offered by VKITTI nor KITTI.
+- YOLOv5 trained on KITTI + VKITTI performs well on KITTI, however, suffers difficulty in detecting in environments not offered by VKITTI nor KITTI.
 
 * Scenes where the model trained with KITTI + VKITTI showed difficulty in detection
   
@@ -61,9 +61,9 @@ night | fog | rain | sunset
 
 ## Training / Validation:
 
-Dataset | Val(Dataset) | Test(BDD100k
+Dataset | mAP.50 Val(Dataset) | mAP.50 Test(BDD100k
 --- | --- | --- |
-KITTI + VKITTI | mAP.50 .8 | mAP.50 .6
+KITTI + VKITTI | .8 | .6
 
 ### Object detection: YOLOv5m6
 - We tried YOLOv5m6 and YOLOl6, however, found that YOLOl6 took too long in our environment. YOLOv5m6 was the best model that matched our conditions.
