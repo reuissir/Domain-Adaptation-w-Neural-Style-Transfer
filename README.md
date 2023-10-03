@@ -12,7 +12,8 @@ Virtual Kitti(VKITTI) offers synthetic object detection data, produced with Unit
 #### Problem at hand: 
 - YOLOv5 trained on KITTI + VKITTI performs well on KITTI dataset, however, suffers difficulty in detecting in environments not offered by VKITTI nor KITTI.
 
-* Scenes where the model trained with KITTI + VKITTI showed difficulty in detection 
+* Scenes where the model trained with KITTI + VKITTI showed difficulty in detection
+* 
 ![c93bd9ce-ea579ed8](https://github.com/reuissir/Domain-Adaptation-w-Neural-Style-Transfer/assets/96709570/1017445f-4a09-4534-8236-b2fdcc204192) ![c093f8be-262822a7](https://github.com/reuissir/Domain-Adaptation-w-Neural-Style-Transfer/assets/96709570/452879c5-b9cf-4611-9151-f800b859ebb0)
 ![c94ceb93-5b8608c4](https://github.com/reuissir/Domain-Adaptation-w-Neural-Style-Transfer/assets/96709570/882200e2-291e-4798-becd-93b9545e9175)
 
