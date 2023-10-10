@@ -47,6 +47,12 @@ We experimented with different augmentation techniques and two optimizers[SGD, A
 - Neural style transfer was conducted on VKITTI Clone.
   ** Hyperparameters:** content layer, style layer, content weight, style weight, total variation weight,            
                         init_method[style, content, random(gaussian or white noise)]
+  
+  We experimented on different style weights and content weights but our primary focus was on the convolutional layers which we would extract our feature representations.      In   the paper, they used conv4_2 because it worked best for their artistic style transfers. On the contrary, we concentrated on keeping the edges and overall shape of       the cars   alive throughout the transfer. Instead of using high-level layers, we chose low-level layers where low-level features are stored.
+
+  **We discovered the existence of different style transfer types: artistic, realistic, cartoon, etc during the project. Yet, we preceded with our model with a hope that     
+    maybe the model will still be forced to find the right features inspite of all the diversity in the data.** 
+  
   - **Content layer:** conv_2 showed best results with content information still strong.
       - Differed per style image. Sometimes conv_3 worked better (ex. Fog)
   - **Style layer:** style information was extracted from every layer except the layer responsible for the content.
@@ -59,24 +65,22 @@ night | fog | rain | sunset
 --- | --- | --- | --- |
 ![night_Scene01_clone_Camera0_00130 (1)](https://github.com/reuissir/Domain-Adaptation-w-Neural-Style-Transfer/assets/96709570/d35d948f-764f-4dca-8dfc-db7633349ea9)|![fog_Scene01_clone_Camera0_00112](https://github.com/reuissir/Domain-Adaptation-w-Neural-Style-Transfer/assets/96709570/e18fcdde-a3ab-4a19-8d80-f47a87d2816d)|![rain_Scene01_clone_Camera0_00308](https://github.com/reuissir/Domain-Adaptation-w-Neural-Style-Transfer/assets/96709570/1cfdf02a-a63f-4b78-936c-5d37d4db6473)|![sunset_Scene18_clone_Camera0_00222](https://github.com/reuissir/Domain-Adaptation-w-Neural-Style-Transfer/assets/96709570/bf3469f8-4662-48e2-88e4-89039dc39b76)
 
-## Training / Validation:
-
-Dataset | mAP.50 Val(Dataset) | mAP.50 Test(BDD100k
---- | --- | --- |
-KITTI + VKITTI | .8 | .6
-
 ### Object detection: YOLOv5m6
 - We tried YOLOv5m6 and YOLOl6, however, found that YOLOl6 took too long in our environment. YOLOv5m6 was the best model that matched our conditions.
 - All training runs were run at 100 epochs, 16 batches, pretrained(COCO-128) weights offered by Ultralytics.
-
-
+- We ran each dataset with different hyperparameters but found the default settings of Ultralytics worked best(Perhaps 100 epochs was not enough).
 
 
 * In short, our experiment with domain adaptation through neural style transfer failed. 
 * When trained with KITTI + VKITTI Clone + VKITTI Clone NST, it scored a mAP.50 of .820 during validation.
 * When validated on BDD100k, the results were a terrible mAP.50 .142. (The need to proceed on this experiment could not be seen)
+* Below are the results
 
-* In contrast, 
+## Training / Validation:
+
+![image](https://github.com/reuissir/Domain-Adaptation-w-Neural-Style-Transfer/assets/96709570/66e94bbb-39c1-410d-8f1c-4a3f33112787)
+
+ 
 
 
 ## Data Preprocess
@@ -108,7 +112,7 @@ Prepare_VKitti_images.py
 #### etc.
 - resize_images.py -- > resize images to 640*640
 - Draw_BBox --> draws bounding box coordinates from annotation file(useful to check if labels were converted properly)
-- 
+  
 
 
 
