@@ -1,0 +1,16 @@
+A lot of data preprocessing was required since we used three different datasets. 
+Each dataset saved its annotations in a different way and the directory structures were different as well.
+
+Starting with KITTI, this was the simplest of the datasets to preprocess because there was a label for each image. Therefore, it was possible to preprocess all the data in one file, Prepare_Kitti.
+
+For BDD100k, all we had to do was know how to access the information coded as a JSON file for the annotations.
+
+VKITTI was arduous. We had to create one code to gather the VKITTI images in one folder while also changing their file names and create a separate code to preprocess the labels.
+**Directory Structure**
+The images are separated in 5 different scene files. 
+Within the scene files there are ten different folders, and within each folder there are images for camera_0(left) and camera_1(right). 
+We only used the images for camera_0 and excluded the images in 15-deg-left, 30-deg-left, 15-deg-right, 30-deg-right.
+About the annotations, the creators of Virtual KITTI included all annotations in one single label file. These were separated according to [frame][camera_id].
+You also have to make sure the annotations for camera_1 aren't created.
+
+
