@@ -2,6 +2,7 @@ I would like to restate that the source of this code is from https://github.com/
 
 Changes that I made:
   - deleted all arg parse statements and brought out the variables as hyperparameters in config
-  - added a code to commit neural style transfer on an entire image folder (originally, it only uses style transfer for one image)
+  - added a function(process_directory()) that takes an entire image directory as input and stylizes every image in the folder
+    - the original code only gives a neural_style_transfer function which stylizes one input image
   - per each style transfer applied to an image, a corresponding annotation(VKITTI) txt file is associated with the output image
     --> this is because I was styling Virtual Vkitti(object detection2d) images with annotations.
