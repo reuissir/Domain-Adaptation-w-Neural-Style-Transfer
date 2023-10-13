@@ -42,7 +42,6 @@ def make_tuning_step(neural_net, optimizer, target_representations, content_feat
         optimizer.zero_grad()
         return total_loss, content_loss, style_loss, tv_loss
 
-    # Returns the function that will be called inside the tuning loop
     return tuning_step
 
 
@@ -58,9 +57,6 @@ def neural_style_transfer(config):
 
     content_img = utils.prepare_img(content_img_path, config['height'], device)
     style_img = utils.prepare_img(style_img_path, config['height'], device)
-
-    # ... [rest of the function remains unchanged]
-
 
     if config['init_method'] == 'random':
         # white_noise_img = np.random.uniform(-90., 90., content_img.shape).astype(np.float32)
@@ -79,7 +75,6 @@ def neural_style_transfer(config):
 
     neural_net, content_feature_maps_index_name, style_feature_maps_indices_names = utils.prepare_model(config['model'], device)
     print(f'Using {config["model"]} in the optimization procedure.')
-
     content_img_set_of_feature_maps = neural_net(content_img)
     style_img_set_of_feature_maps = neural_net(style_img)
 
@@ -95,6 +90,7 @@ def neural_style_transfer(config):
     content_basename = os.path.splitext(os.path.basename(config['content_img_path']))[0]
     image_filename = f"NST_{content_basename}.png"
 
+    # never used it really
     if config['optimizer'] == 'adam':
         optimizer = Adam((optimizing_img,), lr=1e1)
         tuning_step = make_tuning_step(neural_net, optimizer, target_representations, content_feature_maps_index_name[0], style_feature_maps_indices_names[0], config)   
@@ -104,6 +100,7 @@ def neural_style_transfer(config):
                 print(f'Adam | iteration: {cnt:03}, total loss={total_loss.item():12.4f}, content_loss={config["content_weight"] * content_loss.item():12.4f}, style loss={config["style_weight"] * style_loss.item():12.4f}, tv loss={config["tv_weight"] * tv_loss.item():12.4f}')
                 utils.save_and_maybe_display(optimizing_img, dump_path, image_filename, config, cnt, config['num_of_iterations'][config['optimizer']], should_display=False)
 
+    # lbfgs
     elif config['optimizer'] == 'lbfgs':
         # line_search_fn does not seem to have significant impact on result
         optimizer = LBFGS((optimizing_img,), max_iter=config['num_of_iterations']['lbfgs'], line_search_fn='strong_wolfe')
@@ -127,9 +124,11 @@ def neural_style_transfer(config):
 
     return dump_path
 
+# function that will commit style transfer on an entire image folder
 def process_directory(content_images_dir, style_image_path, output_img_dir, labels_dir, optimization_config):
     for content_image_file in os.listdir(content_images_dir):
         content_image_path = os.path.join(content_images_dir, content_image_file)
+        # skip files that already exist
         if "NST_" + content_image_file in os.listdir(output_img_dir):
             continue
         if os.path.isfile(content_image_path):
@@ -188,7 +187,10 @@ if __name__ == "__main__":
         'saving_freq': -1,
         'output_img_dir': output_img_dir,
     }
-    
+
+    # 
+    ## recommended hyperparameter settings
+    #
     # lbfgs, content init -> (cw, sw, tv) = (1e5, 3e4, 1e0)
     # lbfgs, style   init -> (cw, sw, tv) = (1e5, 1e1, 1e-1)
     # lbfgs, random  init -> (cw, sw, tv) = (1e5, 1e3, 1e0)
@@ -196,19 +198,7 @@ if __name__ == "__main__":
     # adam, content init -> (cw, sw, tv, lr) = (1e5, 1e5, 1e-1, 1e1)
     # adam, style   init -> (cw, sw, tv, lr) = (1e5, 1e2, 1e-1, 1e1)
     # adam, random  init -> (cw, sw, tv, lr) = (1e5, 1e2, 1e-1, 1e1)
-    """
-    start_time = time.time()
 
-    # original NST (Neural Style Transfer) algorithm (Gatys et al.)
-    results_path = neural_style_transfer(optimization_config)
-
-    end_time=time.time()
-    duration = end_time - start_time
-
-    print(f"The neural_style_transfer function took {duration:.2f} seconds to complete.")
-    """
-
-    
     # process entire directory
     start_time = time.time()
 
@@ -217,4 +207,14 @@ if __name__ == "__main__":
     end_time = time.time()
     duration = end_time - start_time
     print(f"The process_directory function took {duration:.2f} seconds to complete.")
+
+    """
+    # original NST (Neural Style Transfer) algorithm (Gatys et al.)
+    results_path = neural_style_transfer(optimization_config)
+
+    print(f"The neural_style_transfer function took {duration:.2f} seconds to complete.")
+    """
+
+    
+    
     
