@@ -60,6 +60,7 @@ We experimented with different augmentation techniques and two optimizers[SGD, A
   - A total of 2066 * 4(styles), 8264 images were stylized to form our NST Dataset.
   - KITTI + VKITTI clone + NST dataset was trained to be compared with the original KITTI + VKITTI dataset.
 
+**note: examples posted were rescaled to 250*250. The ones used for training are 640*640**
 night | fog | rain | sunset
 --- | --- | --- | --- |
 ![night_Scene01_clone_Camera0_00130 (1)](https://github.com/reuissir/Domain-Adaptation-w-Neural-Style-Transfer/assets/96709570/d35d948f-764f-4dca-8dfc-db7633349ea9)|![fog_Scene01_clone_Camera0_00112](https://github.com/reuissir/Domain-Adaptation-w-Neural-Style-Transfer/assets/96709570/e18fcdde-a3ab-4a19-8d80-f47a87d2816d)|![rain_Scene01_clone_Camera0_00308](https://github.com/reuissir/Domain-Adaptation-w-Neural-Style-Transfer/assets/96709570/1cfdf02a-a63f-4b78-936c-5d37d4db6473)|![sunset_Scene18_clone_Camera0_00222](https://github.com/reuissir/Domain-Adaptation-w-Neural-Style-Transfer/assets/96709570/bf3469f8-4662-48e2-88e4-89039dc39b76)
