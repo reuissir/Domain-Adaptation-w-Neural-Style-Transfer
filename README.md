@@ -50,8 +50,7 @@ We experimented with different augmentation techniques and two optimizers[SGD, A
   
   We experimented on different style weights and content weights but our primary focus was on the convolutional layers which we would extract our feature representations.      In   the paper, they used conv4_2 because it worked best for their artistic style transfers. On the contrary, we concentrated on keeping the edges and overall shape of       the cars   alive throughout the transfer. Instead of using high-level layers, we chose low-level layers where low-level features are stored.
 
-  **We discovered the existence of different style transfer types: artistic, realistic, cartoon, etc during the project. Yet, we preceded with our model with a hope that     
-    maybe the model will still be forced to find the right features inspite of all the diversity in the data.** 
+  **We discovered the existence of different style transfer types: artistic, realistic, cartoon, etc during the project. The model we used was for artistic style     transfers(we wanted realistic style transfers). Yet, we preceded with our model with a hope that maybe the model will still be forced to find the right features inspite of all the diversity in the data.** 
   
   - **Content layer:** conv_2 showed best results with content information still strong.
       - Differed per style image. Sometimes conv_3 worked better (ex. Fog)
