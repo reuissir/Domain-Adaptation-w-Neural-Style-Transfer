@@ -34,7 +34,7 @@ Virtual Kitti(VKITTI) offers synthetic object detection data, produced with Unit
 [https://github.com/reuissir/pytorch-neural-style-transfer]
 
 **Note:** We modified the code of Neural Style Transfer to perform sequential neural style transfer on an entire image directory.
-During experiments: we used the main code to produce and evaluate a single output at a time
+During experiments, we used the original code to produce and evaluate a single output at a time
 
 #### Environment
 - Ryzen 3600, 2070 Super 8gb, 16 ram
