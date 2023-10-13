@@ -1,8 +1,11 @@
 I would like to restate that the source of this code is from https://github.com/gordicaleksa/pytorch-neural-style-transfer
+(of course I checked the license of the owner and it ensures I'm free of using the code in any way I desire)
 
 Changes that I made:
   - deleted all arg parse statements and brought out the variables as hyperparameters in config
+
   - added a function(process_directory()) that takes an entire image directory as input and stylizes every image in the folder
     - the original code only gives a neural_style_transfer function which stylizes one input image
+
   - per each style transfer applied to an image, a corresponding annotation(VKITTI) txt file is associated with the output image
     --> this is because I was styling Virtual Vkitti(object detection2d) images with annotations.
